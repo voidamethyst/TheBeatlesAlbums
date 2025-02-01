@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en, ua">
+<head>
+    <meta charset="UTF-8">
+    <title>The Beatles Albums History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 40px;
+        }
+        .album {
+            display: flex;
+            margin-bottom: 40px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .album-cover {
+            width: 256px;
+            height: 256px;
+            margin-right: 20px;
+            flex-shrink: 0;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .album-cover:hover {
+            transform: scale(1.1);
+            animation: bubble 0.3s ease-in-out;
+        }
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @keyframes bubble {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1.1); }
+        }
+        .album-info {
+            flex-grow: 1;
+        }
+        .album-title {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        .album-date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .album-description {
+            line-height: 1.6;
+            color: #333;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .modal-content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90vw;
+            height: 90vh;
+            overflow: hidden;
+        }
+        .modal-content img {
+            max-width: none;
+            max-height: none;
+            width: auto;
+            height: auto;
+            transform-origin: center;
+            transition: transform 0.1s ease;
+            cursor: grab;
+        }
+        .modal-content img:active {
+            cursor: grabbing;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .close:hover {
+            color: #bbb;
+        }
+        .footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .social-links a:hover {
+            color: #ffd700;
+        }
+        .social-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Історія альбомів The Beatles</h1>
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Modal Image">
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/PPM.jpg" alt="Please Please Me" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Please Please Me (1963)</h2>
+            <div class="album-date">Випущено: 22 березня 1963</div>
+            <div class="album-description">
+                Дебютний альбом гурту, записаний практично за один день - 11 лютого 1963 року. Десять пісень були записані протягом майже 13-годинної сесії. Альбом містить такі класичні хіти як "Love Me Do", "Twist and Shout" та "Please Please Me". Це був революційний дебют, який встановив нові стандарти для рок-музики.
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/WTB.jpg" alt="With the Beatles" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">With the Beatles (1963)</h2>
+            <div class="album-date">Випущено: 22 листопада 1963</div>
+            <div class="album-description">
+                Другий альбом показав значне зростання гурту як в плані написання пісень, так і в якості виконання. Включає такі хіти як "Money (That's What I Want)" та "Don't Bother Me". Знаменита чорно-біла обкладинка альбому стала однією з найбільш впізнаваних у історії рок-музики.
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/AHDN.jpg" alt="A Hard Day's Night" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">A Hard Day's Night (1964)</h2>
+            <div class="album-date">Випущено: 10 липня 1964</div>
+            <div class="album-description">
+                Перший альбом The Beatles, що містив виключно оригінальні композиції Леннона-Маккартні. Був саундтреком до однойменного фільму. Включає такі класичні пісні як "A Hard Day's Night" та "Can't Buy Me Love".
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/BFS.jpg" alt="Beatles for Sale" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Beatles for Sale (1964)</h2>
+            <div class="album-date">Випущено: 4 грудня 1964</div>
+            <div class="album-description">
+                Четвертий студійний альбом показав втому групи від постійних гастролей та напруженого графіку. Попри це, альбом містить чудові композиції як "Eight Days a Week" та "Every Little Thing", які демонструють більш зрілий підхід до написання пісень.
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/HELP.jpg" alt="Help!" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Help! (1965)</h2>
+            <div class="album-date">Випущено: 6 серпня 1965</div>
+            <div class="album-description">
+                Саундтрек до другого фільму Beatles містив такі хіти як "Help!", "Ticket to Ride", "The Night Before" та "Yesterday" - пісню, яка стала найбільш переспіваною в історії популярної музики. Альбом демонструє перехід групи до більш складної та експериментальної музики.
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/RS.jpg" alt="Rubber Soul" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Rubber Soul (1965)</h2>
+            <div class="album-date">Випущено: 3 грудня 1965</div>
+            <div class="album-description">
+                Цей альбом став поворотним моментом у творчості гурту. Більш складні тексти, використання нових інструментів та експерименти зі звуком створили новий стандарт для рок-альбомів. Містить такі класичні композиції як "Norwegian Wood", "Drive My Car", "Michelle", "Nowhere Man" та "In My Life".
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/REV.jpg" alt="Revolver" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Revolver (1966)</h2>
+            <div class="album-date">Випущено: 5 серпня 1966</div>
+            <div class="album-description">
+                Один з найбільш інноваційних альбомів в історії рок-музики. Експерименти зі студійними технологіями та нові музичні напрямки створили абсолютно новий звук. Включає такі шедеври як "Taxman", "Here, There And Everywhere" та "Yellow Submarine".
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/SPLHCB.jpg" alt="Sgt. Pepper's Lonely Hearts Club Band" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Sgt. Pepper's Lonely Hearts Club Band (1967)</h2>
+            <div class="album-date">Випущено: 26 травня 1967</div>
+            <div class="album-description">
+                Часто називається найкращим альбомом усіх часів. Концептуальний альбом, який змінив уявлення про те, чим може бути рок-музика. Революційне звучання, інноваційні техніки запису та легендарна обкладинка зробили його одним з найвпливовіших альбомів в історії.
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/MMT.jpg" alt="Magical Mystery Tour" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Magical Mystery Tour (1967)</h2>
+            <div class="album-date">Випущено: 27 листопада 1967</div>
+            <div class="album-description">
+                Спочатку випущений як подвійний EP у Великобританії, а потім як повноформатний альбом у США. Продовжив психоделічні експерименти "Sgt. Pepper's". Містить такі хіти як "I Am the Walrus", "Strawberry Fields Forever" та "All You Need Is Love".
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/WA.jpg" alt="The Beatles (White Album)" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">The Beatles (White Album) (1968)</h2>
+            <div class="album-date">Випущено: 22 листопада 1968</div>
+            <div class="album-description">
+                Подвійний альбом з мінімалістичною білою обкладинкою показав повернення до більш простого рок-звучання. Широкий спектр стилів - від хард-року до фолку та авангарду. Містить такі класичні пісні як "While My Guitar Gently Weeps", "Happiness Is A Warm Gun", "Helter Skelter", "Rocky Raccoon", "I'm So Tired" та "Back In The U.S.S.R.".
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/AR.jpg" alt="Abbey Road" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Abbey Road (1969)</h2>
+            <div class="album-date">Випущено: 26 вересня 1969</div>
+            <div class="album-description">
+                Останній записаний (хоча не останній випущений) альбом Beatles. Містить знамениту медлі (You Never Give Me Your Money-Sun King-Mean Mr Mustard-Polythene Pam-She Came In Through The Bathroom Window-Golden Slumbers-Carry That Weight-The End) на другій стороні та такі хіти як "Come Together" та "I Want You (She's So Heavy)". Показав групу на піку їхньої музичної майстерності, незважаючи на внутрішні конфлікти.
+            </div>
+        </div>
+    </div>
+
+    <div class="album">
+        <div class="album-cover">
+            <img src="images/LIB.jpg" alt="Let It Be" onclick="openModal(this.src)">
+        </div>
+        <div class="album-info">
+            <h2 class="album-title">Let It Be (1970)</h2>
+            <div class="album-date">Випущено: 8 травня 1970</div>
+            <div class="album-description">
+                Випущений після розпаду групи, цей альбом був задуманий як повернення до простішого звучання раннього періоду. Продюсер Філ Спектор додав оркестрові аранжування, які викликали суперечки. Містить такі класичні пісні як "Let It Be", "The Long and Winding Road" та "Get Back".
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.thebeatles.com" target="_blank">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                Офіційний сайт
+            </a>
+            <a href="https://www.facebook.com/thebeatles" target="_blank">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                </svg>
+                Facebook
+            </a>
+            <a href="https://www.instagram.com/thebeatles" target="_blank">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                </svg>
+                Instagram
+            </a>
+            <a href="https://x.com/thebeatles" target="_blank">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+    X
+            </a>
+            <a href="https://www.youtube.com/thebeatles" target="_blank">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+            </a>
+        </div>
+        <div class="footer-text">
+            © 2025 The Beatles. Всі права захищені.
+        </div>
+    </footer>
+
+    <script>
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImage");
+const closeBtn = document.getElementsByClassName("close")[0];
+
+let scale = 1;
+let offsetX = 0;
+let offsetY = 0;
+let isDragging = false;
+let startX;
+let startY;
+let lastX;
+let lastY;
+
+const ZOOM_SPEED = 0.1;
+const MAX_ZOOM = 5;
+const MIN_ZOOM = 0.5;
+
+let imageBounds = {
+    width: 0,
+    height: 0,
+    left: 0,
+    top: 0
+};
+
+function openModal(imgSrc) {
+    modal.style.display = "flex";
+    modalImg.src = imgSrc;
+    resetZoomPan();
+    modalImg.onload = function() {
+        updateImageBounds();
+    };
+}
+
+function resetZoomPan() {
+    scale = 1;
+    offsetX = 0;
+    offsetY = 0;
+    updateTransform();
+}
+
+function updateTransform() {
+    modalImg.style.transform = `scale(${scale}) translate(${offsetX}px, ${offsetY}px)`;
+}
+
+function updateImageBounds() {
+    const rect = modalImg.getBoundingClientRect();
+    imageBounds = {
+        width: rect.width,
+        height: rect.height,
+        left: rect.left,
+        top: rect.top
+    };
+}
+
+function handleZoom(event) {
+    event.preventDefault();
+
+    const rect = modalImg.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const oldScale = scale;
+    const delta = -Math.sign(event.deltaY);
+    scale = Math.min(Math.max(scale + (delta * ZOOM_SPEED), MIN_ZOOM), MAX_ZOOM);
+
+    if (scale !== oldScale) {
+        const scaleRatio = scale / oldScale;
+        offsetX = mouseX - (mouseX - offsetX) * scaleRatio;
+        offsetY = mouseY - (mouseY - offsetY) * scaleRatio;
+        updateTransform();
+        updateImageBounds();
+    }
+}
+
+modalImg.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    isDragging = true;
+    startX = e.clientX - offsetX;
+    startY = e.clientY - offsetY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    modalImg.style.cursor = 'grabbing';
+    modalImg.style.transition = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        e.preventDefault();
+        offsetX = e.clientX - startX;
+        offsetY = e.clientY - startY;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        updateTransform();
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    if (isDragging) {
+        isDragging = false;
+        modalImg.style.cursor = 'grab';
+        modalImg.style.transition = 'transform 0.1s ease';
+        updateImageBounds();
+    }
+});
+
+document.addEventListener('mouseleave', () => {
+    if (isDragging) {
+        isDragging = false;
+        modalImg.style.cursor = 'grab';
+        modalImg.style.transition = 'transform 0.1s ease';
+        updateImageBounds();
+    }
+});
+
+closeBtn.onclick = function() {
+    modal.style.display = "none";
+    resetZoomPan();
+};
+
+modal.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+        resetZoomPan();
+    }
+};
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        modal.style.display = "none";
+        resetZoomPan();
+    }
+});
+
+modalImg.addEventListener('touchstart', (e) => e.preventDefault());
+modalImg.addEventListener('touchmove', (e) => e.preventDefault());
+modalImg.addEventListener('touchend', (e) => e.preventDefault());
+
+modalImg.addEventListener('wheel', handleZoom);
+modalImg.addEventListener('contextmenu', (e) => e.preventDefault());
+window.addEventListener('resize', updateImageBounds);
+    </script>
+</body>
+</html>
